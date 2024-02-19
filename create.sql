@@ -16,7 +16,7 @@ CREATE TABLE PersonnesMorales (
 );
 
 -- Création du check pour le type 'word' du code postal
-ALTER TABLE PersonnesMorales ADD CONSTRAINT chk_personnesmorales_codepostal CHECK (REGEXP_LIKE(codePostal, '^[A-Za-z0-9]{4}$'));
+ALTER TABLE PersonnesMorales ADD CONSTRAINT ch_personnesmorales_codepostal CHECK (REGEXP_LIKE(codePostal, '^[A-Za-z0-9]{4}$'));
 
 -- Qualifications
 CREATE SEQUENCE seq_qualifications;
@@ -67,9 +67,9 @@ CREATE TABLE Mandats (
         CONSTRAINT nn_mandats_dateFinPrevue NOT NULL,
     dateFinReelle DATE,
     nbHeuresChefProjet INT DEFAULT 0 
-        CONSTRAINT chk_mandats_nbHeuresChefProjet CHECK (nbHeuresChefProjet >= 0),
+        CONSTRAINT ch_mandats_nbHeuresChefProjet CHECK (nbHeuresChefProjet >= 0),
     nbHeuresMandCom INT DEFAULT 0 
-        CONSTRAINT chk_mandats_nbHeuresMandCom CHECK (nbHeuresMandCom >= 0),
+        CONSTRAINT ch_mandats_nbHeuresMandCom CHECK (nbHeuresMandCom >= 0),
     pm_client_numero NUMBER(10) NOT NULL,
     col_mandCom_numero NUMBER(10) NOT NULL,
     col_chefProjet_numero NUMBER(10) NOT NULL
