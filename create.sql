@@ -25,7 +25,7 @@ ALTER TABLE qualifications ADD (
 	CONSTRAINT uk_qualifications_libelle UNIQUE (libelle)
 	);							
 ALTER TABLE qualifications ADD 
-	CONSTRAINT nn_qulifications_tarifHoraire NOT NULL (tarifHoraire);
+	CONSTRAINT nn_qualifications_tarifHoraire NOT NULL (tarifHoraire);
  
  
 CREATE SEQUENCE seq_collaborateurs;
