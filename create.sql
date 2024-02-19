@@ -1,33 +1,31 @@
+
+-- PersonnesMorales 
 CREATE SEQUENCE seq_personnes_morales;
 
 CREATE TABLE PersonnesMorales (
     numero NUMBER(10) DEFAULT seq_personnes_morales.NEXTVAL
         CONSTRAINT pk_personnes_morales PRIMARY KEY,
-    raisonSociale VARCHAR2(30)
-        CONSTRAINT nn_personnes_morales_raisonSociale NOT NULL,
-    rueNumero VARCHAR2(50)
-        CONSTRAINT nn_personnes_morales_rueNumero NOT NULL,
-    codePostal CHAR(4)
-        CONSTRAINT nn_personnes_morales_codePostal NOT NULL,
-    localite VARCHAR2(100)
-        CONSTRAINT nn_personnes_morales_localite NOT NULL
+    raisonSociale VARCHAR2(30) 
+		CONSTRAINT nn_personnes_morales_raisonSociale NOT NULL,
+    rueNumero VARCHAR2(50) 
+		CONSTRAINT nn_personnes_morales_rueNumero NOT NULL,
+    codePostal CHAR(4) 
+		CONSTRAINT nn_personnes_morales_codePostal NOT NULL,
+    localite VARCHAR2(100) 
+		CONSTRAINT nn_personnes_morales_localite NOT NULL
 );
- 
- 
+
+-- Qualifications
 CREATE SEQUENCE seq_qualifications ;
  
-CREATE TABLE QUALIFICATIONS (Number NUMBER(10) DEFAULT seq_qualifications.Nextval PRIMARY KEY,
-							libelle VARCHAR(20),
-							tarifHoraire NUMBER(3));
-							
-ALTER TABLE qualifications ADD (
-	CONSTRAINT nn_qualifications_libelle NOT NULL (libelle),
-	CONSTRAINT uk_qualifications_libelle UNIQUE (libelle)
-	);							
-ALTER TABLE qualifications ADD 
-	CONSTRAINT nn_qualifications_tarifHoraire NOT NULL (tarifHoraire);
- 
- 
+CREATE TABLE Qualifications (
+    numero NUMBER(10) DEFAULT seq_qualifications.NEXTVAL
+        CONSTRAINT pk_qualifications PRIMARY KEY,
+    libelle VARCHAR2(20) CONSTRAINT nn_qualifications_libelle NOT NULL
+        CONSTRAINT uk_qualifications_libelle UNIQUE,
+    tarifHoraire NUMBER(3) CONSTRAINT nn_qualifications_tarifHoraire NOT NULL
+);
+
 CREATE SEQUENCE seq_collaborateurs;
 
 CREATE TABLE Collaborateurs (
@@ -91,4 +89,4 @@ CREATE TABLE Realisations (
 		   REFERENCES medicaments,
 	   CONSTRAINT fk_realisations_collaborateurs
 	     FOREIGN KEY (col_numero)
-		   REFERENCES consultations );
+		   REFERENCES consultations );	
