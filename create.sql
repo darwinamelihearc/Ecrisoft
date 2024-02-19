@@ -26,44 +26,46 @@ CREATE TABLE Qualifications (
     tarifHoraire NUMBER(3) CONSTRAINT nn_qualifications_tarifHoraire NOT NULL
 );
 
+-- Collaborateurs
 CREATE SEQUENCE seq_collaborateurs;
 
 CREATE TABLE Collaborateurs (
     numero NUMBER(10) DEFAULT seq_collaborateurs.NEXTVAL
         CONSTRAINT pk_collaborateurs PRIMARY KEY,
-    mnemo VARCHAR2(4)
+    mnemo VARCHAR2(4) 
 		CONSTRAINT uk_collaborateurs_mnemo UNIQUE,
-	nom VARCHAR2(40) 
-        CONSTRAINT nn_collaborateurs_nom NOT NULL,
-    prenom VARCHAR2(20)
-        CONSTRAINT nn_collaborateurs_prenom NOT NULL
+    nom VARCHAR2(40) 
+		CONSTRAINT nn_collaborateurs_nom NOT NULL,
+    prenom VARCHAR2(20) 
+		CONSTRAINT nn_collaborateurs_prenom NOT NULL,
+    qual_concerner_numero NUMBER(10)
 );
 
 ALTER TABLE Collaborateurs
-ADD CONSTRAINT fk_qualifications_collaborateurs
-FOREIGN KEY (qual_concerner_numero)
-REFERENCES Qualifications(numero);
- 
- 
+ADD CONSTRAINT fk_qualifications_collaborateurs FOREIGN KEY (qual_concerner_numero)
+REFERENCES Qualifications(numero)
+;
+
+-- Mandats
 CREATE SEQUENCE seq_mandats;
 
 CREATE TABLE Mandats (
     numero NUMBER(10) DEFAULT seq_mandats.NEXTVAL
         CONSTRAINT pk_mandats PRIMARY KEY,
-    reference CHAR(10) NOT NULL
-        CONSTRAINT unq_mandats_reference UNIQUE,
-    description VARCHAR2(30) NOT NULL
-        CONSTRAINT nn_mandats_description,
-    dateSignature DATE NOT NULL
-        CONSTRAINT nn_mandats_dateSignature,
-    dateDebut DATE NOT NULL
-        CONSTRAINT nn_mandats_dateDebut,
-    dateFinPrevue DATE NOT NULL
-        CONSTRAINT nn_mandats_dateFinPrevue,
+    reference CHAR(10) 
+        CONSTRAINT unq_mandats_reference UNIQUE NOT NULL,
+    description VARCHAR2(30) 
+        CONSTRAINT nn_mandats_description NOT NULL,
+    dateSignature DATE 
+        CONSTRAINT nn_mandats_dateSignature NOT NULL,
+    dateDebut DATE 
+        CONSTRAINT nn_mandats_dateDebut NOT NULL,
+    dateFinPrevue DATE 
+        CONSTRAINT nn_mandats_dateFinPrevue NOT NULL,
     dateFinReelle DATE,
-    nbHeuresChefProjet INT DEFAULT 0
+    nbHeuresChefProjet INT DEFAULT 0 
         CONSTRAINT chk_mandats_nbHeuresChefProjet CHECK (nbHeuresChefProjet >= 0),
-    nbHeuresMandCom INT DEFAULT 0
+    nbHeuresMandCom INT DEFAULT 0 
         CONSTRAINT chk_mandats_nbHeuresMandCom CHECK (nbHeuresMandCom >= 0),
     pm_client_numero NUMBER(10) NOT NULL,
     col_mandCom_numero NUMBER(10) NOT NULL,
@@ -71,11 +73,15 @@ CREATE TABLE Mandats (
 );
 
 ALTER TABLE Mandats
-ADD CONSTRAINT fk_mandats_pm_client_numero FOREIGN KEY (pm_client_numero) REFERENCES PersonnesMorales(numero),
-ADD CONSTRAINT fk_mandats_col_mandCom_numero FOREIGN KEY (col_mandCom_numero) REFERENCES Collaborateurs(numero),
-ADD CONSTRAINT fk_mandats_col_chefProjet_numero FOREIGN KEY (col_chefProjet_numero) REFERENCES Collaborateurs(numero);
- 
- 
+ADD CONSTRAINT fk_mandats_pm_client_numero FOREIGN KEY (pm_client_numero) 
+REFERENCES PersonnesMorales(numero),
+ADD CONSTRAINT fk_mandats_col_mandCom_numero FOREIGN KEY (col_mandCom_numero) 
+REFERENCES Collaborateurs(numero),
+ADD CONSTRAINT fk_mandats_col_chefProjet_numero FOREIGN KEY (col_chefProjet_numero) 
+REFERENCES Collaborateurs(numero)
+;
+
+
 CREATE TABLE Realisations (
 	mand_numero Number(10) 
 		CONSTRAINT nn_real_mand_num NOT NULL, 
