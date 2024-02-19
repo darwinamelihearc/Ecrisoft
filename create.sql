@@ -48,6 +48,7 @@ REFERENCES Qualifications(numero);
  
  
 CREATE SEQUENCE seq_mandats;
+
 CREATE TABLE Mandats (
     numero NUMBER(10) DEFAULT seq_mandats.NEXTVAL
         CONSTRAINT pk_mandats PRIMARY KEY,
@@ -70,6 +71,7 @@ CREATE TABLE Mandats (
     col_mandCom_numero NUMBER(10) NOT NULL,
     col_chefProjet_numero NUMBER(10) NOT NULL
 );
+
 ALTER TABLE Mandats
 ADD CONSTRAINT fk_mandats_pm_client_numero FOREIGN KEY (pm_client_numero) REFERENCES PersonnesMorales(numero),
 ADD CONSTRAINT fk_mandats_col_mandCom_numero FOREIGN KEY (col_mandCom_numero) REFERENCES Collaborateurs(numero),
