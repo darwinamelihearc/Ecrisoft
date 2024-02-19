@@ -81,7 +81,7 @@ ADD CONSTRAINT fk_mandats_col_chefProjet_numero FOREIGN KEY (col_chefProjet_nume
 REFERENCES Collaborateurs(numero)
 ;
 
-
+-- Realisations
 CREATE TABLE Realisations (
     mand_numero NUMBER(10) 
         CONSTRAINT nn_real_mand_num NOT NULL,
@@ -98,3 +98,17 @@ CREATE TABLE Realisations (
         FOREIGN KEY (col_numero) 
             REFERENCES Collaborateurs(numero)
 );
+
+-- Indexes
+CREATE INDEX idx_personnesmorales_raisonsociale ON PersonnesMorales(raisonSociale);
+CREATE INDEX idx_qualifications_libelle ON Qualifications(libelle);
+CREATE INDEX idx_collaborateurs_mnemo ON Collaborateurs(mnemo);
+CREATE INDEX idx_mandats_reference ON Mandats(reference);
+
+-- Optimisation des jointures
+CREATE INDEX idx_collaborateurs_qualconcernernumero ON Collaborateurs(qual_concerner_numero);
+CREATE INDEX idx_mandats_pmclientnumero ON Mandats(pm_client_numero);
+CREATE INDEX idx_mandats_colmandcomnumero ON Mandats(col_mandCom_numero);
+CREATE INDEX idx_mandats_colchefprojetnumero ON Mandats(col_chefProjet_numero);
+CREATE INDEX idx_realisations_mandnumero ON Realisations(mand_numero);
+CREATE INDEX idx_realisations_colnumero ON Realisations(col_numero);
