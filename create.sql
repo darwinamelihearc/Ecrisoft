@@ -16,7 +16,7 @@ CREATE TABLE PersonnesMorales (
 );
 
 -- Qualifications
-CREATE SEQUENCE seq_qualifications ;
+CREATE SEQUENCE seq_qualifications;
  
 CREATE TABLE Qualifications (
     numero NUMBER(10) DEFAULT seq_qualifications.NEXTVAL
@@ -83,16 +83,18 @@ REFERENCES Collaborateurs(numero)
 
 
 CREATE TABLE Realisations (
-	mand_numero Number(10) 
-		CONSTRAINT nn_real_mand_num NOT NULL, 
-	col_numero Number(10) 
-		CONSTRAINT nn_real_col_num NOT NULL,
-	nbHeures Number(10)
-		CONSTRAINT nn_real_nbheures NOT NULL,
-		CONSTRAINT pk_realisations PRIMARY KEY (mand_numero,col_numero), 
-		CONSTRAINT fk_realisations_mandats
-	     FOREIGN KEY (mand_numero)
-		   REFERENCES medicaments,
-	   CONSTRAINT fk_realisations_collaborateurs
-	     FOREIGN KEY (col_numero)
-		   REFERENCES consultations );	
+    mand_numero NUMBER(10) 
+        CONSTRAINT nn_real_mand_num NOT NULL,
+    col_numero NUMBER(10) 
+        CONSTRAINT nn_real_col_num NOT NULL,
+    nbHeures NUMBER(10) 
+        CONSTRAINT nn_real_nbHeures NOT NULL,
+
+    CONSTRAINT pk_realisations PRIMARY KEY (mand_numero, col_numero),
+    CONSTRAINT fk_realisations_mandats 
+        FOREIGN KEY (mand_numero) 
+            REFERENCES Mandats(numero),
+    CONSTRAINT fk_realisations_collaborateurs 
+        FOREIGN KEY (col_numero) 
+            REFERENCES Collaborateurs(numero)
+);
