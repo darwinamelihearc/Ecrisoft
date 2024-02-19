@@ -19,6 +19,7 @@ CREATE SEQUENCE seq_qualifications ;
 CREATE TABLE QUALIFICATIONS (Number NUMBER(10) DEFAULT seq_qualifications.Nextval PRIMARY KEY,
 							libelle VARCHAR(20),
 							tarifHoraire NUMBER(3));
+							
 ALTER TABLE qualifications ADD (
 	CONSTRAINT nn_qualifications_libelle NOT NULL (libelle),
 	CONSTRAINT uk_qualifications_libelle UNIQUE (libelle)
@@ -28,6 +29,7 @@ ALTER TABLE qualifications ADD
  
  
 CREATE SEQUENCE seq_collaborateurs;
+
 CREATE TABLE Collaborateurs (
     numero NUMBER(10) DEFAULT seq_collaborateurs.NEXTVAL
         CONSTRAINT pk_collaborateurs PRIMARY KEY,
@@ -38,6 +40,7 @@ CREATE TABLE Collaborateurs (
     prenom VARCHAR2(20)
         CONSTRAINT nn_collaborateurs_prenom NOT NULL
 );
+
 ALTER TABLE Collaborateurs
 ADD CONSTRAINT fk_qualifications_collaborateurs
 FOREIGN KEY (qual_concerner_numero)
