@@ -15,6 +15,9 @@ CREATE TABLE PersonnesMorales (
 		CONSTRAINT nn_personnes_morales_localite NOT NULL
 );
 
+-- Création du check pour le type 'word' du code postal
+ALTER TABLE PersonnesMorales ADD CONSTRAINT chk_personnesmorales_codepostal CHECK (REGEXP_LIKE(codePostal, '^[A-Za-z0-9]{4}$'));
+
 -- Qualifications
 CREATE SEQUENCE seq_qualifications;
  
