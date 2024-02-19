@@ -84,6 +84,16 @@ ADD CONSTRAINT fk_mandats_col_chefProjet_numero FOREIGN KEY (col_chefProjet_nume
 REFERENCES Collaborateurs(numero)
 ;
 
+CREATE OR REPLACE TRIGGER trg_prevent_pm_update
+BEFORE UPDATE OF pm_client_numero ON Mandats
+FOR EACH ROW
+BEGIN
+    IF :OLD.pm_client_numero IS NOT NULL AND :NEW.pm_client_numero != :OLD.pm_client_numero THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Modification de la Personne Morale pour un Mandat existant est interdite.');
+    END IF;
+END;
+/
+
 -- Realisations
 CREATE TABLE Realisations (
     mand_numero NUMBER(10) 
