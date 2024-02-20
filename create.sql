@@ -75,14 +75,16 @@ CREATE TABLE Mandats (
     col_chefProjet_numero NUMBER(10) NOT NULL
 );
 
-ALTER TABLE Mandats
-ADD CONSTRAINT fk_mandats_pm_client_numero FOREIGN KEY (pm_client_numero) 
-REFERENCES PersonnesMorales(numero),
-ADD CONSTRAINT fk_mandats_col_mandCom_numero FOREIGN KEY (col_mandCom_numero) 
-REFERENCES Collaborateurs(numero),
-ADD CONSTRAINT fk_mandats_col_chefProjet_numero FOREIGN KEY (col_chefProjet_numero) 
-REFERENCES Collaborateurs(numero)
-;
+ALTER TABLE Mandats 
+    ADD CONSTRAINT fk_mandats_pm_client_numero FOREIGN KEY (pm_client_numero) 
+        REFERENCES PersonnesMorales(numero);
+ALTER TABLE Mandats 
+    ADD CONSTRAINT fk_mandats_col_mandCom_numero FOREIGN KEY (col_mandCom_numero) 
+        REFERENCES Collaborateurs(numero);
+ALTER TABLE Mandats 
+    ADD CONSTRAINT fk_mandats_col_chefProjet_numero FOREIGN KEY (col_chefProjet_numero) 
+        REFERENCES Collaborateurs(numero);
+
 
 CREATE OR REPLACE TRIGGER trg_prevent_pm_update
 BEFORE UPDATE OF pm_client_numero ON Mandats
