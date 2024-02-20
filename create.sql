@@ -116,9 +116,6 @@ CREATE TABLE Realisations (
 
 -- Indexes
 CREATE INDEX idx_personnesmorales_raisonsociale ON PersonnesMorales(raisonSociale);
-CREATE INDEX idx_qualifications_libelle ON Qualifications(libelle);
-CREATE INDEX idx_collaborateurs_mnemo ON Collaborateurs(mnemo);
-CREATE INDEX idx_mandats_reference ON Mandats(reference);
 
 -- Optimisation des jointures
 CREATE INDEX idx_collaborateurs_qualconcernernumero ON Collaborateurs(qual_concerner_numero);
