@@ -43,6 +43,7 @@ CREATE TABLE Collaborateurs (
     prenom VARCHAR2(20) 
 		CONSTRAINT nn_collaborateurs_prenom NOT NULL,
     qual_concerner_numero NUMBER(10)
+        CONSTRAINT nn_collaborateurs_qualconcernernumero NOT NULL
 );
 
 ALTER TABLE Collaborateurs
