@@ -27,6 +27,7 @@ CREATE TABLE Qualifications (
     libelle VARCHAR2(20) CONSTRAINT nn_qualifications_libelle NOT NULL
         CONSTRAINT uk_qualifications_libelle UNIQUE,
     tarifHoraire NUMBER(3) CONSTRAINT nn_qualifications_tarifHoraire NOT NULL
+        CONSTRAINT ch_qualifications_tarifHoraire CHECK (tarifHoraire > 0)
 );
 
 -- Collaborateurs
